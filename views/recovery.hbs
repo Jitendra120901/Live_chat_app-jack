@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recovery</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Boxicons Css -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="script.js" defer></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'poppins', sans-serif;
+        }
+
+        body {
+
+            background: url('bg9.jpeg')no-repeat center center/cover;
+
+        }
+
+
+        .container {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            column-gap: 30px;
+        }
+
+        .form {
+            position: absolute;
+            max-width: 430px;
+            width: 100%;
+            padding: 30px;
+            border-radius: 6px;
+            background: #FCFFE7;
+        }
+
+        header {
+            font: 28px;
+            font-weight: 600;
+            color: #232836;
+            text-align: center;
+        }
+
+        .form .field {
+            position: relative;
+            height: 50px;
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 6px;
+        }
+
+        .field input,
+        .field button {
+            background-color: #F5EBE0;
+            height: 100%;
+            width: 100%;
+            border: none;
+            font-size: 16px;
+            font-weight: 400;
+            border-radius: 6px;
+        }
+
+        .field input {
+            outline: none;
+            padding: 0 15px;
+            border: 1px solid #cacaca;
+        }
+
+        .field button {
+            color: #fff;
+            background-color: #2B3467;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-top: -8px;
+        }
+
+        .field button:hover {
+            background-color: #2B3467;
+        }
+
+        .form a {
+            color: #0171d3;
+            text-decoration: none;
+
+        }
+
+        .media-options a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media screen and(max-width: 400px) {
+            .form {
+                padding: 15px 10px;
+            }
+        }
+
+        p{
+            
+            background-color: rgb(185, 232, 206);
+          
+            border-radius: 14px;
+          
+        }
+
+        h4{
+            background-color: green;
+        }
+          
+    </style>
+    </head>
+
+<body>
+
+     
+    <section class="container forms">
+        
+
+        <div class="form login">
+           <h4>{{messege}}</h4>
+            <div class="form-content">
+                <header>Login</header>
+                <form method="post">
+                    <div class="field input-field">
+                        <input type="email" name="ln_email" placeholder="Email" class="input" id="check" required>
+                    </div>
+                    <p id="temp"></p>
+                    <div class="field button-field">
+                     
+                        
+                        <button type="submit">continue</button>
+                    </div>
+                </form>
+
+            </div>
+
+
+        </div>
+        
+       
+       
+
+</body>
+
+</html>

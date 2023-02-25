@@ -20,6 +20,7 @@
    /* background: var(--dark); */
     color: var(--pure);
     background:url("https://source.unsplash.com/random")no-repeat center center/cover;
+    height: 100vh;
   }
   
   .container {
@@ -205,4 +206,67 @@
   
   .mobile .nav-wrapper ul.dropdown-list li a {
     color: var(--dark-gray);
+  }
+
+
+  /* main body content designing */
+
+  
+  #mainbody{
+    top: 50%;
+  color: pink;
+  height: 100px;
+  width: 100%;
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  margin: auto;
+  /* to align the icon */
+  text-align: center;
+  line-height: 120px;
+  font-family:Georgia, Times, 'Times New Roman', serif
+    
+  }
+
+  h1{
+    animation:motion;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes motion{
+    0%{
+      letter-spacing:2px;
+    }
+    20%{
+      letter-spacing: 4px;
+      color: cyan;
+    }
+    40%{
+      letter-spacing: 6px;
+      color:lime;
+    }
+    60%{
+      letter-spacing: 8px;
+      color: red;
+    }
+    80%{
+      letter-spacing: 8px;
+      color:fuchsia;
+    }
+    70%{
+      letter-spacing: 7px;
+      color:darkblue;
+    }
+    90%{
+      letter-spacing: 6px;
+      color: coral;
+    }
+    100%{
+      letter-spacing: 4px;
+      color: ghostwhite;
+    }
   }

@@ -1,14 +1,20 @@
-
-const mongoose = require("mongoose");
-const login_data = require('./dataconnection.js');
-const DB = 'mongodb+srv://jitendra_12:jitendra@cluster0.83h76ye.mongodb.net/information?retryWrites=true&w=majority';
 let express = require('express');
 let bodyParser = require('body-parser');
 let app = express();
+// creating http server by http and express module
 var http = require('http').Server(app);
+// require socket.io labrery  for the real time work or live work
 var io = require('socket.io')(http);
+// Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files. 
 const multer = require('multer');
 const path = require('path')
+
+// mongodb data base module 
+const mongoose = require("mongoose");
+//  required mongodb Database connection file 
+const login_data = require('./dataconnection.js');
+// Database connection with mongodb 
+const DB = 'mongodb+srv://jitendra_12:jitendra@cluster0.83h76ye.mongodb.net/information?retryWrites=true&w=majority';
 
 // getting rendom port if it exits otherwise defult port will take place
 let port = process.env.PORT || 3000;  
@@ -31,9 +37,7 @@ app.use(express.static(path.join(__dirname, "/views/")));
 app.use(express.static('uploads/image'));
 
 
-
-
-
+// with the help of multer we are specifiying  defult of uploading profile 
 const Storagefile = multer.diskStorage({
 
     destination: "./uploads/image/",
@@ -69,6 +73,7 @@ setInterval(() => {
     let date = new Date();
     dataAndTime = date.toLocaleTimeString();
 }, 1000);
+
 
 // Email verification  code 
     async function main(email) {
@@ -114,6 +119,7 @@ setInterval(() => {
  //   console.log("Message sent: %s", nodemailer.getTestMessageUrl(info));
 }
 
+// Routs 
 let gobalvariable;
 app.get('/', (req, res) => {
     res.render('index');
@@ -378,13 +384,7 @@ app.post("/recovery", async (req, res) => {
         });
 
     }
-    else
-        if ("") {
-            res.sendFile(__dirname + '/temperory.html');
-
-        }
-
-        else {
+    else {
             // let name=jack;
             res.sendFile(__dirname + '/temperory.html');
             // res.render('mail sent succesfully', {title:'message sent', value:'jack' , succes:'messege sent'})
@@ -392,8 +392,12 @@ app.post("/recovery", async (req, res) => {
 
 });
 
+// defining empty array variable , it is used to store and provide unique id to uses 
 let activeUsers = {};
-
+ 
+// if any connection request hit by url on broswer then it will be called automaticall
+// "socket.on" is used to listen events 
+// "socket.emit" is used to 
 io.on('connection', function (socket) {
 
     socket.emit('user_name', { user: gobalvariable, time: dataAndTime });

@@ -21,6 +21,10 @@
     color: var(--pure);
     background:url("https://source.unsplash.com/random")no-repeat center center/cover;
     height: 100vh;
+   /* font-family:Georgia, Times, 'Times New Roman', serif */
+   font-family:Tahoma, Verdana, sans-serif;
+  
+
   }
   
   .container {
@@ -53,6 +57,7 @@
     list-style-type: none;
     display: flex;
     align-items: center;
+    font-family: Impact,'Arial Narrow Bold', sans-serif;
   }
   
   .nav-wrapper ul.nav-list li {
@@ -83,6 +88,7 @@
     letter-spacing: 1px;
     border: 1px solid transparent;
     transition: all 0.5s ease-in-out;
+    font-family: Impact,'Arial Narrow Bold', sans-serif;
   }
   
   .btn:hover {

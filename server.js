@@ -7,34 +7,57 @@ let bodyParser = require('body-parser');
 let app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-const multer=require('multer');
+const multer = require('multer');
 const path = require('path')
 
+// getting rendom port if it exits otherwise defult port will take place
+let port = process.env.PORT || 3000;  
 
-const Storagefile=multer.diskStorage({
+// cookies set 
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+
+// Email sender module
+let fs = require('fs');
+const nodemailer = require("nodemailer");
+
+// form Data parser  
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+
+// setting template engines &&
+app.set("view engine", "hbs");
+app.use(express.static(path.join(__dirname, "/views/")));
+app.use(express.static('uploads/image'));
+
+
+
+
+
+const Storagefile = multer.diskStorage({
 
     destination: "./uploads/image/",
-       filename:(req,file,cb)=>{
+    filename: (req, file, cb) => {
 
-           cb(null,   Date.now()+'-'+file.originalname  );
-       }
+        cb(null, Date.now() + '-' + file.originalname);
+    }
 });
 
 const upload = multer({
-    storage:Storagefile,
-    fileFilter:(req,file , cb)=>{
-     if(
-        file.mimetype=='image/jpeg'||
-      file.mimetype=='image/jpg'||
-      file.mimetype=='image/png'||
-      file.mimetype=='image/gif'
-     ){
-        cb(null, true)
-     }
-     else{
-        cb(null, false);
-        cb(new Error('only , jpeg ,png, jpg,gif image allow'))
-     }
+    storage: Storagefile,
+    fileFilter: (req, file, cb) => {
+        if (
+            file.mimetype == 'image/jpeg' ||
+            file.mimetype == 'image/jpg' ||
+            file.mimetype == 'image/png' ||
+            file.mimetype == 'image/gif'
+        ) {
+            cb(null, true)
+        }
+        else {
+            cb(null, false);
+            cb(new Error('only , jpeg ,png, jpg,gif image allow'))
+        }
     }
 });
 
@@ -47,11 +70,8 @@ setInterval(() => {
     dataAndTime = date.toLocaleTimeString();
 }, 1000);
 
-
-// Email verification code
-let fs = require('fs');
-const nodemailer = require("nodemailer");
-async function main(email) {
+// Email verification  code 
+    async function main(email) {
 
     // Only needed if you don't have a real mail account for testing
     let testAccount = await nodemailer.createTestAccount();
@@ -91,58 +111,36 @@ async function main(email) {
         }
     })
 
-    console.log("Message sent: %s", nodemailer.getTestMessageUrl(info));
-
+ //   console.log("Message sent: %s", nodemailer.getTestMessageUrl(info));
 }
-// cookies set 
-
-const cookieParser = require("cookie-parser");
-app.use(cookieParser());
-// cookies code ended
-
-let port = process.env.PORT || 3000;
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
-app.use(express.static(path.join(__dirname, "/views/")));
-
-app.set("view engine", "hbs")
-app.use(express.static('uploads/image'));
 
 let gobalvariable;
-
 app.get('/', (req, res) => {
     res.render('index');
-   // console.log(__dirname+"/views/temp/registrationpage/registration");
-
    // res.sendFile(__dirname + 'public/index.html');
-
 })
 
 app.get('/login', (req, res) => {
-
-    res.render('./login',);
+   res.render('./login',);
     //res.sendFile(__dirname + 'public/login.html');
-
-
 })
 
-app.get('/recovery',  (req, res) => {
+app.get('/recovery', (req, res) => {
     res.render('./recovery');
     //res.sendFile(__dirname + 'public/login.html');
-  
+
 
 })
 
-app.get('/registration',(req, res)=>{
-   
- res.render("./registration")
+app.get('/registration', (req, res) => {
+
+    res.render("./registration")
 });
 
 
-app.post("/uploads/image/", upload.single('file') ,async function(req, res) {
-   
- console.log(req.body ,  req.file);
+app.post("/uploads/image/", upload.single('file'), async function (req, res) {
+
+    console.log(req.body, req.file);
 
 
     // registration Section Data
@@ -150,25 +148,25 @@ app.post("/uploads/image/", upload.single('file') ,async function(req, res) {
     var email = req.body.e;
     var pass = req.body.p;
     var repass = req.body.cp;
-  //  var image = req.file.filename;
+    //  var image = req.file.filename;
 
 
-        const fistLoginData = new login_data({
+    const fistLoginData = new login_data({
 
-            name: name,
-            email: email,
-            pass: pass,
-            repass: repass,
-            image:req.file.filename
-           
-        });
-           if (pass == repass) {
+        name: name,
+        email: email,
+        pass: pass,
+        repass: repass,
+        image: req.file.filename
+
+    });
+    if (pass == repass) {
 
         // collectiion.findOne() returns promiss data exits or not
-        const tem =await  login_data.findOne({ email: email }, { new: true }).exec();
+        const tem = await login_data.findOne({ email: email }, { new: true }).exec();
         if (tem) {
 
-            login_data.find({ email: email }, await function(err, result) {
+            login_data.find({ email: email }, await function (err, result) {
 
                 res.sendFile(__dirname + '/emailused.html');
             });
@@ -182,11 +180,11 @@ app.post("/uploads/image/", upload.single('file') ,async function(req, res) {
             main(email).catch(console.error);
 
         }
- }
+    }
     else {
         res.sendFile(__dirname + '/passMissMatch.html');
     }
-   
+
 });
 
 app.post("/login", async function (req, res) {
@@ -204,7 +202,7 @@ app.post("/login", async function (req, res) {
 
             console.log(result);
             gobalvariable = result[0].name;
-            let imagename=result[0].image;
+            let imagename = result[0].image;
 
             if (result[0].email == ln_email && result[0].pass == ln_pas) {
 
@@ -215,9 +213,9 @@ app.post("/login", async function (req, res) {
                 res.cookie("logindata", setData, { maxAge: 360000 });
 
                 console.log(req.cookies.logindata);
-               res.render("app.hbs",{image:imagename});
-              // res.render('testpage',{image: imagename});
-               
+                res.render("app.hbs", { image: imagename });
+                // res.render('testpage',{image: imagename});
+
             }
             else res.sendFile(__dirname + '/passwordNotmatch.html');
 
@@ -363,9 +361,9 @@ app.post("/recovery", async (req, res) => {
                             if (err) { console.log("mail not sent"); }
                             else {
 
-                                let mes="your password has been sent to your email account"
-                
-                               res.render("./recovery.hbs",  {messege:mes})
+                                let mes = "your password has been sent to your email account"
+
+                                res.render("./recovery.hbs", { messege: mes })
 
                             }
                         });
@@ -381,21 +379,18 @@ app.post("/recovery", async (req, res) => {
 
     }
     else
-    if("") {
-        res.sendFile(__dirname + '/temperory.html');
+        if ("") {
+            res.sendFile(__dirname + '/temperory.html');
 
-    }
-   
-    else 
-    {   
-       // let name=jack;
-        res.sendFile(__dirname + '/temperory.html');
-   // res.render('mail sent succesfully', {title:'message sent', value:'jack' , succes:'messege sent'})
-    }
+        }
+
+        else {
+            // let name=jack;
+            res.sendFile(__dirname + '/temperory.html');
+            // res.render('mail sent succesfully', {title:'message sent', value:'jack' , succes:'messege sent'})
+        }
 
 });
-
-
 
 let activeUsers = {};
 
@@ -422,7 +417,7 @@ io.on('connection', function (socket) {
     socket.on('deliToServer', (msg) => {
 
         socket.broadcast.emit('receive',
-        
+
             {
                 messege: msg,
                 gobalvariable: activeUsers[socket.id],
@@ -430,16 +425,11 @@ io.on('connection', function (socket) {
             }
         )
     });
-
-
-
-
 });
-
 
 http.listen(port, (err) => {
     console.log(err);
 
-    console.log(`sever is running on port 3000`);
+    console.log(`sever is running on port  ${port}`);
 
 });

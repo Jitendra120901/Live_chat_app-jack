@@ -100,7 +100,7 @@ const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 // cookies code ended
 
-let port = process.env.PORT || 5000;
+let port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
@@ -437,7 +437,7 @@ io.on('connection', function (socket) {
 });
 
 
-http.listen(3000, (err) => {
+http.listen(port, (err) => {
     console.log(err);
 
     console.log(`sever is running on port 3000`);

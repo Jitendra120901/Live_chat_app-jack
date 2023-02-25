@@ -1,0 +1,37 @@
+h1{ 
+    width:500px;
+margin: auto;
+margin-top:160px;
+  }
+  h3{ 
+    width:450px;
+   
+    margin: auto;
+
+  }
+  h2{ 
+    width:300px;
+    margin: auto;
+
+   }
+  
+   img {
+
+width: 70px;
+animation-name: rotate;
+animation-duration: 0.011s;
+animation-iteration-count: infinite;
+}
+
+@keyframes rotate {
+
+from {
+
+transform: rotate(0deg);
+}
+
+to {
+transform: rotate(359deg);
+}
+}
+ 

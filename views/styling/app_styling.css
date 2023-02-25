@@ -1,0 +1,309 @@
+* {
+    margin: 0%;
+    padding: 0%;
+
+}
+
+body {
+
+    background-color: rgb(240, 248, 235);
+}
+
+
+.nav {
+    width: 100%;
+    background-color: rgba(37, 179, 155, 0.888);
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    width: 230px;
+    margin: 5px;
+}
+
+#icon {
+
+    font-size: 48px;
+    margin: 9px;
+    animation-name: rotate;
+    animation-duration: 0.58s;
+    animation-iteration-count: infinite;
+}
+
+
+@keyframes rotate {
+
+    from {
+
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+
+#whatsapp {
+    width: 160px;
+    margin-top: 30px;
+    color: bisque;
+    font-weight: 800;
+    font-family: 'Gill Sans', 'Gill Sans MT';
+    font-size: 28px;
+    padding: 5;
+
+}
+
+
+
+#chatbox1 {
+
+    overflow-y: auto;
+    width: 100%;
+    height: 520px;
+    margin: auto;
+    margin-top: px;
+    background-color: rgb(240, 248, 235);
+}
+
+
+
+#message {
+    width: 150px;
+    margin: auto;
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 15px;
+    font-family: 'Gill Sans', 'Gill Sans MT';
+    font-size: 12px;
+    background-color: rgb(12, 149, 103);
+    color: white;
+    font-weight: 800;
+    text-align: center;
+    clear: both;
+
+
+}
+
+
+#chat-left {
+    border: 1px solid snow;
+    float: left;
+    clear: both;
+    width: 170px;
+
+    padding: 5px;
+    border: 1px solid black;
+    font-family: 'Gill Sans', 'Gill Sans MT';
+    font-size: 12px;
+    background-color: aliceblue;
+    border-radius: 15px;
+    color: black;
+    font-weight: 800;
+    margin: 10px;
+}
+#chat-left2 {
+   
+    float: left;
+   clear: both;
+     height: 170px;
+    width: 170px;
+    display: block;
+    margin:15px;
+    
+}
+
+#chat-right {
+    float: right;
+    clear: both;
+    width: 170px;
+
+    padding: 5px;
+    font-family: 'Gill Sans', 'Gill Sans MT';
+    font-size: 12px;
+    background-color: rgb(102, 232, 188);
+    border-radius: 15px;
+    color: black;
+    font-weight: 800;
+     }
+
+      #chat-right2 {
+    float: right;
+    clear: both;
+  
+     height: 170px;
+    width: 170px;
+    display: block;
+    margin:15px;
+    
+   
+     }
+
+#textAndsend {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 5px;
+
+}
+
+
+#inputAndIcons {
+    background-color: white;
+    width: 89%;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+    border: 2px solid rgb(159, 156, 156);
+    border-radius: 12px;
+
+}
+
+#textbox {
+    width: 50%;
+    outline-color: white;
+    border: 0px;
+
+
+}
+
+button {
+
+    width: 11%;
+    border-radius: 39px;
+    background-color: rgba(0, 189, 157, 0.888);
+    border: 0px;
+}
+
+.fa-microphone {
+
+    font-size: 30px;
+    color: rgb(0, 208, 255);
+    border-radius: 12px;
+    border: 0px;
+    margin: 5px;
+
+}
+
+/*
+.fa-microphone:hover {
+
+    font-weight: 400;
+    font-size: 40px;
+}
+
+*/
+
+@keyframes jack1 {
+
+    0% {
+
+        letter-spacing: 0px;
+    }
+
+    30% {
+
+        letter-spacing: 1px;
+    }
+
+    60% {
+        color: white;
+        letter-spacing: 3px;
+
+    }
+
+    80% {
+        color: aliceblue;
+        letter-spacing: 3px;
+        color: yellow;
+
+    }
+
+    100% {
+
+        letter-spacing: 1px;
+        color: yellow;
+    }
+}
+
+
+
+.fa-camera {
+
+    font-size: 27px;
+    color: rgb(185, 190, 196);
+    margin: 5px;
+
+}
+
+#sendPhoto {
+    display: flex;
+    flex-direction: row;
+}
+
+#inputTag {
+
+    display: none;
+
+}
+
+label {
+    cursor: pointer;
+
+
+}
+
+#profile {
+    margin-top: 10px;
+    height: 75px;
+    display: block;
+    position: absolute;
+    right: 0;
+    margin-right: 18px;
+}
+
+#logo_name {
+    display: block;
+    margin: auto;
+    font-weight: 800;
+    font-family: 'Gill Sans', sans-serif;
+    font-size: 12px;
+    color: white;
+    animation-name: jack1;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
+img {
+
+    display: block;
+    margin: auto;
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+}
+
+.fa-paperclip {
+    color: rgb(185, 190, 196);
+}
+
+.fa-paper-plane {
+
+    font-size: 20px;
+    color: rgb(8, 34, 40);
+    border-radius: 12px;
+    border: 0px;
+    margin: 5px;
+
+}

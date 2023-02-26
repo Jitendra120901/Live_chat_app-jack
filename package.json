@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "build": "rm -rf dist && bebel backend -d dist && cd fronted  && npm install &&  npm run build"
+    "build": " npm install &&  npm run build"
   },
   "keywords": [],
   "author": "",

@@ -19,7 +19,7 @@ nav {
     display: flex;
     flex-direction: row;
     width: 230px;
-    margin: 5px;
+    margin: 8px;
 }
 
 #icon {
@@ -47,11 +47,11 @@ nav {
 
 #whatsapp {
     width: 160px;
-    margin-top: 30px;
+    margin-top: 15px;
     color: bisque;
     font-weight: 800;
     font-family: 'Gill Sans', 'Gill Sans MT';
-    font-size: 28px;
+    font-size: 20px;
     padding: 5;
 
 }
@@ -307,3 +307,19 @@ img {
     margin: 5px;
 
 }
+
+
+.brand {
+    display: flex;
+    align-items: center;
+  }
+  
+  .brand svg {
+    height: 27px;
+    margin-right: 10px;
+  }
+  
+  .brand svg path {
+    fill: var(--pure);
+  }
+  

@@ -42,12 +42,12 @@
     height: 100%;
     width: 100%;
     padding-top: 20px;
-    background: linear-gradient(to right, #0a0a0b, #d467a9);
+   /* background: linear-gradient(to right, #0a0a0b, #d467a9); */
     object-fit: cover;
     overflow: hidden;
   }
 
-  .right{
+  body{
     animation-name:images;
     animation-duration: 25s;
     animation-iteration-count: infinite;
@@ -269,7 +269,7 @@
     width: 100%;
     font-size: 53;
     color:aqua;
-  
+   font-family: Georgia, Times, 'Times New Roman', serif;
   }
 
   @keyframes h2{
@@ -326,6 +326,7 @@ color:rgb(250, 160, 160);
     animation: h2;
     animation-duration: 2s;
     animation-iteration-count: infinite;
+    font-family: Georgia, Times, 'Times New Roman', serif;
   }
 
 
@@ -481,7 +482,8 @@ color:rgb(250, 160, 160);
   @keyframes images {
 
     0% {
-      /*  background:url("https://source.unsplash.com/TWoL-QCZubY")no-repeat center center/cover; */
+        background:url("https://source.unsplash.com/0mfh-KbRUzA")no-repeat center center/cover; 
+      
     }
 
     20% {

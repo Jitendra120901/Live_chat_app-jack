@@ -32,18 +32,6 @@ nav {
 }
 
 
-@keyframes rotate {
-
-    from {
-
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(359deg);
-    }
-}
-
 
 #whatsapp {
     width: 160px;
@@ -316,6 +304,7 @@ img {
   
   .brand svg {
     height: 27px;
+    color: chocolate;
     margin-right: 10px;
   }
   

@@ -76,7 +76,7 @@ setInterval(() => {
 
 
 // Email verification  code 
-    async function main(email) {
+    async function main(email,name) {
 
     // Only needed if you don't have a real mail account for testing
     let testAccount = await nodemailer.createTestAccount();
@@ -102,8 +102,104 @@ setInterval(() => {
                 from: '"Live_chat_Application" <jack704921@gmail.com>', // sender address
                 to: email,  // list of receivers
                 subject: "For Email Verification ✔", // Subject line
-                text: "kaise ho guys", // plain text body
-                html: data // html body
+                text: "kaise ho", // plain text body
+                html:`<!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset='utf-8'>
+                    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+                    <title>Page Title</title>
+                    <meta name='viewport' content='width=device-width, initial-scale=1'>
+                   <style> 
+                p{
+                
+                    text-align: center;
+                    margin: auto;
+                    color: rgb(150, 66, 66);
+                    letter-spacing: 1px;
+                    height: 100%;
+                    width: 100%;
+                    font-family:'Segoe UI', Tahoma, Verdana, sans-serif;
+                    font-size: 16px;
+                }
+                a{
+                    text-decoration: none;
+                    display: block;
+                    color: #ffffff;
+                    background-color: #ff7900;
+                    border-radius: 10px;
+                    width: 30%;
+                    border-top: 0px solid transparent;
+                    font-weight: 400;
+                    border-right: 0px solid transparent;
+                    border-bottom: 4px solid #c3610b;
+                    border-left: 0px solid transparent;
+                    padding-top: 2px;
+                    padding-bottom: 5px;
+                    font-family:Helvetica,sans-serif;
+                    font-size: 12px;
+                    text-align: center;
+                    word-break: keep-all;
+                    text-align: center;
+                    margin:auto;
+                }
+                
+                
+                
+                h4{
+                
+                  
+                    text-decoration: none;
+                    display: block;
+                    color: #ffffff;
+                    background-color:rgb(29, 197, 239);
+                    border-radius: 10px;
+                    width: 30%;
+                    border-top: 0px solid transparent;
+                    font-weight: 400;
+                    border-right: 0px solid transparent;
+                    border-bottom: 4px solid rgb(101, 212, 240);
+                    border-left: 0px solid transparent;
+                    padding-top: 2px;
+                    padding-bottom: 5px;
+                    font-family: Georgia, Times, 'Times New Roman', serif;
+                    font-size: 12px;
+                    text-align: center;
+                    word-break: keep-all;
+                    text-align: center;
+                    margin:15px auto;
+                    
+                }
+                
+                fieldset{
+                
+                    background-color: rgb(240, 255, 250);
+                }
+                body{
+                   
+                    background-attachment: fixed;
+                    background-color: rgb(239, 239, 225);
+                }
+                </style>
+                </head>
+                <body>
+                <fieldset>
+                    <h4> Live_Chat_App</h4>
+                    <br>
+                    
+                    <p>
+                        Thanks for singing up with the Live_Chat_Application!
+                         You must click below button to activate your account 
+                         and redirect to into your account.
+                    </p><br>
+                <a  href="https://live-chat-app-jack.onrender.com/?name=${name}">Click Here to Verify your Email</a>
+                </fieldset>
+                       
+                      
+                  
+                
+                </body>
+                </html>`// html body
             }, (err, data) => {
                 if (err) { console.log("mail not sent"); }
                 else {
@@ -122,7 +218,11 @@ setInterval(() => {
 // Routs 
 let gobalvariable;
 app.get('/', (req, res) => {
-    res.render('index');
+    let url = require('url').parse(req.url, true).query;
+    console.log(url.name);
+    let name = url.name;
+
+    res.render('index' , {tempName:name});
    // res.sendFile(__dirname + 'public/index.html');
 })
 
@@ -146,7 +246,7 @@ app.get('/registration', (req, res) => {
 
 app.post("/uploads/image/", upload.single('file'), async function (req, res) {
 
-    console.log(req.body, req.file);
+   // console.log(req.body, req.file);
 
 
     // registration Section Data
@@ -174,21 +274,22 @@ app.post("/uploads/image/", upload.single('file'), async function (req, res) {
 
             login_data.find({ email: email }, await function (err, result) {
 
-                res.sendFile(__dirname + '/emailused.html');
+                res.render('../emailused', {email:email});
             });
         }
 
         else {
-            res.sendFile(__dirname + '/emailVerificationLink.html');
+            res.render('./emailVerificationLink', {email:email, name:req.body.name});
+            
 
             fistLoginData.save();
 
-            main(email).catch(console.error);
+            main(email,name).catch(console.error);
 
         }
     }
     else {
-        res.sendFile(__dirname + '/passMissMatch.html');
+        res.sendFile('../passMissMatch');
     }
 
 });

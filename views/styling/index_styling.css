@@ -217,75 +217,108 @@ nav ul.dropdown-list {
 
 
 /* main body content designing */
-
-
-p {
-  top: 50%;
-  color: pink;
-  height: 100px;
+#select_chatMode{
+  margin-top:220px;
+  height: 50%;
   width: 100%;
-
   position: absolute;
   left: 0;
   bottom: 0;
   right: 0;
   top: 0;
-  margin: auto;
-  /* to align the icon */
+ 
+  line-height: 69px;
   text-align: center;
-  line-height: 120px;
+  line-height: 60px;
   font-family: Georgia, Times, 'Times New Roman', serif;
-
   animation: motion;
-  animation-duration: 8s;
+  animation-duration: 4s;
   animation-iteration-count: infinite;
+ 
+
 
 }
 
+#selection{
+  height:50px;
+   letter-spacing:4px;
+  animation: motion;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  background-color:lightsteelblue;
+  font-family: Impact, sans-serif;
+  border-radius: 12px;
+  border: 0px ;
+  font: 600;
+  margin: 5px;
+  text-align: center;
+  letter-spacing:4px;
+  
+}
+
+#room{
+  height:50px;
+  width: 230px;
+  letter-spacing:4px;
+ animation: motion;
+ animation-duration: 4s;
+ animation-iteration-count: infinite;
+ background-color:rgb(188, 238, 255);
+ font-family:sans-serif;
+ border-radius: 7px;
+ border: 0px ;
+ font: 600;
+ margin: 5px;
+ text-align: center;
+
+}
+
+
+
 @keyframes motion {
   0% {
-    letter-spacing: 2px;
+  
     font-weight: 300;
   }
 
   20% {
-    letter-spacing: 6px;
+   
     color: cyan;
     font-weight: 400;
   }
 
   40% {
-    letter-spacing: 8px;
-    color: lime;
-    font-weight: 500;
+  
+   color:hotpink;
+   
   }
 
   60% {
-    letter-spacing: 12px;
+   
     color: red;
-    font-weight: 900;
+  
   }
 
   80% {
-    letter-spacing: 8px;
+   
     color: fuchsia;
-    font-weight: 700;
+    
   }
 
   70% {
-    letter-spacing: 7px;
+   
     color: darkblue;
-    font-weight: 600;
+    
   }
 
   90% {
-    letter-spacing: 6px;
+    
     color: coral;
     font-weight: 500;
   }
 
   100% {
-    letter-spacing: 4px;
+   
     color: ghostwhite;
     font-weight: 400;
   }

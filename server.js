@@ -17,7 +17,7 @@ const login_data = require('./dataconnection.js');
 const DB = 'mongodb+srv://jitendra_12:jitendra@cluster0.83h76ye.mongodb.net/information?retryWrites=true&w=majority';
 
 // getting rendom port if it exits otherwise defult port will take place
-let port = process.env.PORT || 3000;  
+let port = process.env.PORT || 3000;
 
 // cookies set 
 const cookieParser = require("cookie-parser");
@@ -76,7 +76,7 @@ setInterval(() => {
 
 
 // Email verification  code 
-    async function main(email,name) {
+async function main(email, name) {
 
     // Only needed if you don't have a real mail account for testing
     let testAccount = await nodemailer.createTestAccount();
@@ -103,7 +103,7 @@ setInterval(() => {
                 to: email,  // list of receivers
                 subject: "For Email Verification ✔", // Subject line
                 text: "kaise ho", // plain text body
-                html:`<!DOCTYPE html>
+                html: `<!DOCTYPE html>
                 <html>
                 <head>
                     <meta charset='utf-8'>
@@ -212,22 +212,32 @@ setInterval(() => {
         }
     })
 
- //   console.log("Message sent: %s", nodemailer.getTestMessageUrl(info));
+    //   console.log("Message sent: %s", nodemailer.getTestMessageUrl(info));
 }
 
 // Routs 
 let gobalvariable;
 app.get('/', (req, res) => {
     let url = require('url').parse(req.url, true).query;
-    console.log(url.name);
     let name = url.name;
+    res.render('index', { tempName: name });
 
-    res.render('index' , {tempName:name});
-   // res.sendFile(__dirname + 'public/index.html');
 })
 
 app.get('/login', (req, res) => {
-   res.render('./login',);
+    let chat_type = req.query.chat_type;
+    if (chat_type == "General Chat") {
+        res.render('./app',);
+    }
+    else {
+        res.render('./login',);
+        //res.sendFile(__dirname + 'public/login.html');
+    }
+
+})
+app.get('/room', (req, res) => {
+    let roomName = req.query.roomName;
+    res.render('./room', { roomName });
     //res.sendFile(__dirname + 'public/login.html');
 })
 
@@ -246,7 +256,7 @@ app.get('/registration', (req, res) => {
 
 app.post("/uploads/image/", upload.single('file'), async function (req, res) {
 
-   // console.log(req.body, req.file);
+    // console.log(req.body, req.file);
 
 
     // registration Section Data
@@ -274,17 +284,17 @@ app.post("/uploads/image/", upload.single('file'), async function (req, res) {
 
             login_data.find({ email: email }, await function (err, result) {
 
-                res.render('../emailused', {email:email});
+                res.render('../emailused', { email: email });
             });
         }
 
         else {
-            res.render('./emailVerificationLink', {email:email, name:req.body.name});
-            
+            res.render('./emailVerificationLink', { email: email, name: req.body.name });
+
 
             fistLoginData.save();
 
-            main(email,name).catch(console.error);
+            main(email, name).catch(console.error);
 
         }
     }
@@ -295,6 +305,7 @@ app.post("/uploads/image/", upload.single('file'), async function (req, res) {
 });
 
 app.post("/login", async function (req, res) {
+
 
     // Login  Section  Data
     var ln_email = req.body.ln_email;
@@ -320,8 +331,13 @@ app.post("/login", async function (req, res) {
                 res.cookie("logindata", setData, { maxAge: 360000 });
 
                 console.log(req.cookies.logindata);
-                res.render("app.hbs", { image: imagename });
-                // res.render('testpage',{image: imagename});
+                //res.render("app.hbs", { image: imagename });
+
+
+                res.render("index2.hbs", { tempName: gobalvariable });
+
+
+
 
             }
             else res.sendFile(__dirname + '/passwordNotmatch.html');
@@ -381,7 +397,6 @@ app.post("/recovery", async (req, res) => {
                         <title>Page Title</title>
                         <meta name='viewport' content='width=device-width, initial-scale=1'>
                        <style> 
-
                     #text{
                         
                          text-align: center;
@@ -429,9 +444,7 @@ app.post("/recovery", async (req, res) => {
                         background-attachment: fixed;
                         background-color: rgb(234, 234, 231);
                     }
-
                     h5{
-
                         font-size:22px;
                         font-weight: 400;
                         width: 45%;
@@ -439,14 +452,11 @@ app.post("/recovery", async (req, res) => {
                         text-align:center;
                         word-break: keep-all;
                         background-color:white;
-
-
                     }
                     </style>
                         </head>
                         <fieldset>
                         <body>
-
     <h4> Live_Chat_App</h4>
     
     <p id="text">
@@ -458,7 +468,6 @@ app.post("/recovery", async (req, res) => {
     </p>
      
    
-
 </body>
 </fieldset>
 </html>
@@ -486,50 +495,106 @@ app.post("/recovery", async (req, res) => {
 
     }
     else {
-            // let name=jack;
-            res.sendFile(__dirname + '/temperory.html');
-            // res.render('mail sent succesfully', {title:'message sent', value:'jack' , succes:'messege sent'})
-        }
+        // let name=jack;
+        res.sendFile(__dirname + '/temperory.html');
+        // res.render('mail sent succesfully', {title:'message sent', value:'jack' , succes:'messege sent'})
+    }
 
 });
 
-// defining empty array variable , it is used to store and provide unique id to uses 
-let activeUsers = {};
- 
+
 // if any connection request hit by url on broswer then it will be called automaticall
 // "socket.on" is used to listen events 
 // "socket.emit" is used to 
 io.on('connection', function (socket) {
+  
+  
+    
+    socket.on('new_user-joined', (room) => {
+      let  temproom_name = room;
+    
+        if (temproom_name) {
+            let activeUsers = {};
+     // defining empty array variable , it is used to store and provide unique id to uses
+            activeUsers[socket.id] = gobalvariable;
+           
+            socket.emit('user_name', { user: gobalvariable, time: dataAndTime });
+    
+            socket.join(temproom_name)
+            socket.to(temproom_name).emit('user-joined1_room',  activeUsers[socket.id]);
 
-    socket.emit('user_name', { user: gobalvariable, time: dataAndTime });
-    socket.on('new_user-joined', () => {
+            socket.on('disconnect', () => {
 
-        console.log(gobalvariable + ' join the group');
-        activeUsers[socket.id] = gobalvariable;
-        socket.broadcast.emit('user-joined1', gobalvariable);
+                console.log(activeUsers[socket.id] + ' left the group');
+    
+                io.sockets.in(room).emit('user-left_room', activeUsers[socket.id]);
+                let roomname = io.sockets.adapter.rooms
+                var roster = io.sockets.adapter.rooms.get(temproom_name);
+                const numClients = roster ? roster.size : 0;
+                console.log(roomname);
+                console.log(numClients);
+    
+    
+            });
 
-        socket.on('disconnect', () => {
+            socket.on('deliToServer_room', (msg) => {
 
-            console.log(gobalvariable + ' left the group');
+                socket.to(temproom_name).emit('receive_room',
+        
+                    {
+                        messege: msg,
+                        gobalvariable: activeUsers[socket.id],
+                        time: dataAndTime
+                    }
+                )
+            });
 
-            socket.broadcast.emit('user-left', gobalvariable);
+            let roomname = io.sockets.adapter.rooms
+            var roster = io.sockets.adapter.rooms.get(temproom_name);
+            const numClients = roster ? roster.size : 0;
+            console.log(roomname);
+            console.log(numClients);
 
 
-        });
+        }
+
+        else {
+            let activeUsers2 = {};
+
+         // defining empty array variable , it is used to store and provide unique id to uses 
+        
+            activeUsers2[socket.id] = gobalvariable;
+           
+            socket.emit('user_name', { user: activeUsers2[socket.id], time: dataAndTime });
+            socket.broadcast.emit('user-joined1', activeUsers2[socket.id]);
+            socket.on('disconnect', () => {
+
+                console.log(activeUsers2[socket.id] + ' left the group');
+    
+                socket.broadcast.emit('user-left', activeUsers2[socket.id]);
+    
+    
+            });
+
+            socket.on('deliToServer', (msg) => {
+
+                socket.broadcast.emit('receive',
+        
+                    {
+                        messege: msg,
+                        gobalvariable: activeUsers2[socket.id],
+                        time: dataAndTime
+                    }
+                )
+            });
+
+        }
+
+       
 
     });
 
-    socket.on('deliToServer', (msg) => {
-
-        socket.broadcast.emit('receive',
-
-            {
-                messege: msg,
-                gobalvariable: activeUsers[socket.id],
-                time: dataAndTime
-            }
-        )
-    });
+   
 });
 
 http.listen(port, (err) => {

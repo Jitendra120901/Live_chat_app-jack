@@ -162,18 +162,20 @@
         chatbox.appendChild(messageElment);
     };
     // let useName = prompt('Enter your name pls');
-    socket.emit('new_user-joined');
-   
-    socket.on('user_name', (data3) => {
+    var name = "{{roomName}}";
+    let temp2name;
+    socket.emit('new_user-joined' ,name);
+     socket.on('user_name', (data3) => {
         // console.log(data3);
         document.getElementById('logo_name').innerText = data3.user;
       temp2name=data3.user;
         newtime = data3.time;
     });
-    socket.on('user-joined1', (data) => {
+
+    socket.on('user-joined1_room', (data) => {
         append(`${data}  join the group`, "message");
     });
-    socket.on('user-left', (data) => {
+    socket.on('user-left_room', (data) => {
         append(`${data}  left the group`, "message");
     });
     var form = document.getElementById('webform');
@@ -184,25 +186,24 @@
     form.addEventListener('submit', (evnt) => {
         evnt.preventDefault();
         var msg = sentmsg.value;
-
         if (msg.length > 550) {
 
             append2(`${msg}`, "chat-right2");
             document.getElementById('textbox').value = '';
         }
-        // it's a string
+        
         else {
 
             append(`You : ${msg} (${newtime})`, "chat-right");
-            document.getElementById('textbox').innerText = '';
+           
         }
 
         scrollToButtom()
-        socket.emit('deliToServer', msg)
+        socket.emit('deliToServer_room', msg)
     })
-    socket.on('receive', (data) => {
+    socket.on('receive_room', (data) => {
         let length1 = Object.values(data);
-        //    alert(length1[0].length);
+         //  alert(length1[0].length);
 
 
         if (length1[0].length > 400) {

@@ -40,7 +40,7 @@
             </nav>
 
             <div id="profile">
-                <img src="{{image}}" alt="">
+                <img id="profile_image" alt="">
                 <p id="logo_name"></p>
             </div>
         </div>
@@ -129,10 +129,6 @@
         }
     }
 </script>
-
-
-
-
 <script src="/socket.io/socket.io.js"></script>
 <script defer>
     let socket = io();
@@ -163,20 +159,21 @@
     };
     // let useName = prompt('Enter your name pls');
      const usrTemp ="{{usr}}";
-     alert(usrTemp)
     socket.emit('new_user-joined',{name:"",usrTemp:usrTemp});
    
     socket.on('user_name', (data3) => {
-        
+        let image = data3.image;
         document.getElementById('logo_name').innerText = usrTemp;
-      temp2name=data3.user;
+          document.getElementById('profile_image').src=image;      
+     
         newtime = data3.time;
     });
     socket.on('user-joined1', (data) => {
-        append(`${data}  join the group`, "message");
-    });
+        append(`${data}  joined Public Room`, "message");
+        
+      });
     socket.on('user-left', (data) => {
-        append(`${data}  left the group`, "message");
+        append(`${data}  left the Room`, "message");
     });
     var form = document.getElementById('webform');
     setInterval(() => {

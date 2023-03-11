@@ -56,7 +56,7 @@
   <video id="video" autoplay muted loop>
     <source src="./styling/WhatsApp Video 2023-02-25 at 21.16.36.mp4" type="video/mp4">
   </video>
-  <div id="select_chatMode">
+
   <div id="select_chatMode">
     <h4>You Have To Select  Any Chat mode for Chat</h4>
     <select id="selection">
@@ -69,9 +69,10 @@
 
 
   <script>
-
+       //dynemically name getting  username in the place of Signup
       var name = "{{tempName}}";
-    if (name == "") { }
+   
+    if (name == "") {}
      else {
       let msg = document.getElementById('signup');
       msg.innerHTML = name;
@@ -87,14 +88,19 @@
         }
          
        function comfirm(){
-    
-        let chatType = document.getElementById('selection').value;
+        if(name=="") {
+           
+           alert(" Ooops You didn't Login , Please First Login ")
+        }
+        else{
+
+                  let chatType = document.getElementById('selection').value;
      // alert(chatType);
        if(chatType=='Private Chat'){
     
-    select_chatMode.innerHTML += `<input type="number" id="room" placeholder="Enter Your Room's code">`;
+    document.getElementById('select_chatMode').innerHTML += `<input type="number" id="room" placeholder="Enter Your Room's code">`;
      
-      select_chatMode.innerHTML += `<input type="button" class="btn" onclick="getRoomName();" value="Creat or Join Room"><br>`;
+     document.getElementById('select_chatMode').innerHTML += `<input type="button" class="btn" onclick="getRoomName();" value="Creat or Join Room"><br>`;
        // Generating room name and redirecting to room 
          
     }
@@ -111,7 +117,9 @@
        }
        
            
-    //dynemically name getting  username in the place of Signup
+        }
+       
+   
    
    
      window.addEventListener("resize", function () {

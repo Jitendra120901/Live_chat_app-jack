@@ -217,6 +217,7 @@ async function main(email, name) {
 
 // Routs 
 let gobalvariable;
+let profilePic;
 app.get('/', (req, res) => {
     let url = require('url').parse(req.url, true).query;
     let name = url.name;
@@ -324,7 +325,7 @@ app.post("/login", async function (req, res) {
 
             console.log(result);
            gobalvariable = result[0].name;
-            let imagename = result[0].image;
+            profilePic= result[0].image;
 
             if (result[0].email == ln_email && result[0].pass == ln_pas) {
 
@@ -523,7 +524,7 @@ io.on('connection', function (socket) {
      // defining empty array variable , it is used to store and provide unique id to uses
             activeUsers[socket.id] = gobalvariable2;
            
-            socket.emit('user_name', { user: activeUsers[socket.id], time: dataAndTime });
+            socket.emit('user_name', { image:profilePic, time: dataAndTime });
     
             socket.join(temproom_name)
             socket.to(temproom_name).emit('user-joined1_room',  activeUsers[socket.id]);
@@ -570,12 +571,12 @@ io.on('connection', function (socket) {
         
             activeUsers2[socket.id] = gobalvariable2;
            
-            socket.emit('user_name', { user: activeUsers2[socket.id], time: dataAndTime });
-            console.log(activeUsers2[socket.id] + ' left the group');
+            socket.emit('user_name', { image:profilePic, time: dataAndTime });
+            console.log(activeUsers2[socket.id] + ' Joined the Room');
             socket.broadcast.emit('user-joined1', activeUsers2[socket.id]);
             socket.on('disconnect', () => {
 
-                console.log(activeUsers2[socket.id] + ' left the group');
+                console.log(activeUsers2[socket.id] + ' left the Room');
     
                 socket.broadcast.emit('user-left', activeUsers2[socket.id]);
     

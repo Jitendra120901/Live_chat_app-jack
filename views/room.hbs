@@ -163,11 +163,14 @@
     };
     // let useName = prompt('Enter your name pls');
     var name = "{{roomName}}";
+     const tempname ="{{user}}";
+     alert(tempname);
     let temp2name;
-    socket.emit('new_user-joined' ,name);
+    socket.emit('new_user-joined' ,{name:name, usrTemp:tempname});
      socket.on('user_name', (data3) => {
         // console.log(data3);
-        document.getElementById('logo_name').innerText = data3.user;
+       
+       document.getElementById('logo_name').innerText = tempname;
       temp2name=data3.user;
         newtime = data3.time;
     });

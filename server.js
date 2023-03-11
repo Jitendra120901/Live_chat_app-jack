@@ -226,8 +226,9 @@ app.get('/', (req, res) => {
 
 app.get('/login', (req, res) => {
     let chat_type = req.query.chat_type;
+    let usr = req.query.usr;
     if (chat_type == "General Chat") {
-        res.render('./app',);
+        res.render('./app',{usr:usr});
     }
     else {
         res.render('./login',);
@@ -237,7 +238,10 @@ app.get('/login', (req, res) => {
 })
 app.get('/room', (req, res) => {
     let roomName = req.query.roomName;
-    res.render('./room', { roomName });
+    let usr = req.query.usr;
+    
+
+    res.render('./room', { roomName:roomName, user:usr });
     //res.sendFile(__dirname + 'public/login.html');
 })
 
@@ -319,7 +323,7 @@ app.post("/login", async function (req, res) {
         login_data.find({ email: ln_email }, (err, result) => {
 
             console.log(result);
-            gobalvariable = result[0].name;
+           gobalvariable = result[0].name;
             let imagename = result[0].image;
 
             if (result[0].email == ln_email && result[0].pass == ln_pas) {
@@ -328,13 +332,13 @@ app.post("/login", async function (req, res) {
                     email: result[0].email,
                     password: result[0].pass
                 }
-                res.cookie("logindata", setData, { maxAge: 360000 });
+             //   res.cookie("logindata", setData, { maxAge: 360000 });
 
-                console.log(req.cookies.logindata);
-                //res.render("app.hbs", { image: imagename });
+              //  console.log(req.cookies.logindata);
+               // res.render("app.hbs", { image: imagename });
 
 
-                res.render("index2.hbs", { tempName: gobalvariable });
+                res.render("index.hbs", { tempName: gobalvariable });
 
 
 
@@ -511,14 +515,15 @@ io.on('connection', function (socket) {
   
     
     socket.on('new_user-joined', (room) => {
-      let  temproom_name = room;
+      let  temproom_name = room.name;
+      let gobalvariable2=room.usrTemp;
     
-        if (temproom_name) {
+        if (temproom_name!="") {
             let activeUsers = {};
      // defining empty array variable , it is used to store and provide unique id to uses
-            activeUsers[socket.id] = gobalvariable;
+            activeUsers[socket.id] = gobalvariable2;
            
-            socket.emit('user_name', { user: gobalvariable, time: dataAndTime });
+            socket.emit('user_name', { user: activeUsers[socket.id], time: dataAndTime });
     
             socket.join(temproom_name)
             socket.to(temproom_name).emit('user-joined1_room',  activeUsers[socket.id]);
@@ -527,7 +532,7 @@ io.on('connection', function (socket) {
 
                 console.log(activeUsers[socket.id] + ' left the group');
     
-                io.sockets.in(room).emit('user-left_room', activeUsers[socket.id]);
+                io.sockets.in(temproom_name).emit('user-left_room', activeUsers[socket.id]);
                 let roomname = io.sockets.adapter.rooms
                 var roster = io.sockets.adapter.rooms.get(temproom_name);
                 const numClients = roster ? roster.size : 0;
@@ -563,9 +568,10 @@ io.on('connection', function (socket) {
 
          // defining empty array variable , it is used to store and provide unique id to uses 
         
-            activeUsers2[socket.id] = gobalvariable;
+            activeUsers2[socket.id] = gobalvariable2;
            
             socket.emit('user_name', { user: activeUsers2[socket.id], time: dataAndTime });
+            console.log(activeUsers2[socket.id] + ' left the group');
             socket.broadcast.emit('user-joined1', activeUsers2[socket.id]);
             socket.on('disconnect', () => {
 

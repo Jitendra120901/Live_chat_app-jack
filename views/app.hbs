@@ -162,11 +162,13 @@
         chatbox.appendChild(messageElment);
     };
     // let useName = prompt('Enter your name pls');
-    socket.emit('new_user-joined');
+     const usrTemp ="{{usr}}";
+     alert(usrTemp)
+    socket.emit('new_user-joined',{name:"",usrTemp:usrTemp});
    
     socket.on('user_name', (data3) => {
-        // console.log(data3);
-        document.getElementById('logo_name').innerText = data3.user;
+        
+        document.getElementById('logo_name').innerText = usrTemp;
       temp2name=data3.user;
         newtime = data3.time;
     });

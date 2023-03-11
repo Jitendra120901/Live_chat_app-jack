@@ -91,6 +91,7 @@ nav {
     color: black;
     font-weight: 800;
     margin: 10px;
+    text-align: center;
 }
 #chat-left2 {
    
@@ -111,10 +112,11 @@ nav {
     padding: 5px;
     font-family: 'Gill Sans', 'Gill Sans MT';
     font-size: 12px;
-    background-color: rgb(102, 232, 188);
+    background-color:rgb(12, 130, 203);
     border-radius: 15px;
-    color: black;
+    color:whitesmoke;
     font-weight: 800;
+    text-align: center;
      }
 
       #chat-right2 {

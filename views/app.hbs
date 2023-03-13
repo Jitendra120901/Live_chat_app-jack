@@ -159,12 +159,13 @@
     };
     // let useName = prompt('Enter your name pls');
      const usrTemp ="{{usr}}";
-    socket.emit('new_user-joined',{name:"",usrTemp:usrTemp});
+     const profilePic3 = "{{profilePic3}}";
+    socket.emit('new_user-joined',{name:"",usrTemp:usrTemp ,profilePic4:profilePic3 });
    
     socket.on('user_name', (data3) => {
-        let image = data3.image;
+      //  let image = data3.image;
         document.getElementById('logo_name').innerText = usrTemp;
-          document.getElementById('profile_image').src=image;      
+          document.getElementById('profile_image').src=profilePic3;      
      
         newtime = data3.time;
     });

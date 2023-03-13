@@ -40,7 +40,7 @@
             </nav>
 
             <div id="profile">
-                <img id="profile_image" alt="">
+                <img src="{{profilePic2}}" id="profile_image" alt="">
                 <p id="logo_name"></p>
             </div>
         </div>
@@ -164,12 +164,14 @@
     // let useName = prompt('Enter your name pls');
     var name = "{{roomName}}";
      const tempname ="{{user}}";
+    // const profilePic="{{profilePic2}}";
+
     let temp2name;
     socket.emit('new_user-joined' ,{name:name, usrTemp:tempname});
      socket.on('user_name', (data3) => {
         let image = data3.image;
-        document.getElementById('logo_name').innerText = usrTemp;
-          document.getElementById('profile_image').src=image;      
+        document.getElementById('logo_name').innerText = tempname;
+        //  document.getElementById('profile_image').src=image;      
      
         newtime = data3.time;
     });

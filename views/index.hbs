@@ -28,7 +28,7 @@
         <li class="active">
           <a href="#">Home</a>
         </li>
-        <li><a href="./registration" id="signup">signup</a></li>
+        <li><a href="./registration">signup</a></li>
         <!--
                 <li>
 
@@ -47,7 +47,7 @@
 
         <li><a href="#">Contact</a></li>
         <li>
-          <button class="btn"><a href="./login">Login</a></button>
+          <button class="btn"><a href="./login"  id="signup">Login</a></button>
         </li>
       </ul>
     </div>
@@ -56,7 +56,7 @@
   <video id="video" autoplay muted loop>
     <source src="./styling/WhatsApp Video 2023-02-25 at 21.16.36.mp4" type="video/mp4">
   </video>
-
+  
   <div id="select_chatMode">
     <h4>You Have To Select  Any Chat mode for Chat</h4>
     <select id="selection">
@@ -71,7 +71,7 @@
   <script>
        //dynemically name getting  username in the place of Signup
       var name = "{{tempName}}";
-   
+      var profilePic="{{profilePic}}"
     if (name == "") {}
      else {
       let msg = document.getElementById('signup');
@@ -84,13 +84,13 @@
 
         function getRoomName(){
            let room = document.getElementById('room').value;
-         document.getElementById('select_chatMode').innerHTML += `<button class="btn"><a href="./room?roomName=${room}&usr=${name}">Join The ${room}</a></button>`;
+         document.getElementById('select_chatMode').innerHTML += `<button class="btn"><a href="./room?roomName=${room}&usr=${name}&profilePic=${profilePic}">Join The ${room} Room</a></button>`;
         }
          
        function comfirm(){
         if(name=="") {
            
-           alert(" Ooops You didn't Login , Please First Login ")
+           alert(" Ooops You didn't Login 😅😅, Please First Login ")
         }
         else{
 
@@ -112,7 +112,7 @@
 
     else{
            
-         select_chatMode.innerHTML += ` <button class="btn"><a href="./login?chat_type=${chatType}&usr=${name}">Go to Public Chat Room</a></button>`
+         select_chatMode.innerHTML += ` <button class="btn"><a href="./login?chat_type=${chatType}&usr=${name}&profilePic3=${profilePic}">Go to Public Chat Room</a></button>`
     }
        }
        

@@ -18,24 +18,23 @@
     function show() {
 
       document.getElementById('form-set').classList.toggle("active");
+      let nav = document.getElementById('nav');
+      nav.remove();
+      
     }
   </script>
   <link rel="stylesheet" href="./styling/registration_styling.css">
 </head>
 
 <body>
-  <div class="split right">
-    <nav>
+   <nav id="nav">
     
-      <button class="button" onclick="show();">Get Started</button>
+      <button class="button" onclick="show();">Click Here To Get Started</button>
    
   </nav>
-
-
-    
-
-
-      <div id="form-set">
+  <div class="split right">
+   
+ <div id="form-set">
 
         <!--create a login forrm -->
 
@@ -76,18 +75,20 @@
           <form action="uploads/image/" method="POST" enctype="multipart/form-data">
 
 
-            <p> <i id="i3" class="fas fa-user-tie" id="i2"></i><input type="text" name="name"
+            <p> <i id="i3" class="fas fa-user-tie" id="i2"></i>
+            <input id="input" type="text" name="name"
                 placeholder="ENTER  USERNAME" required> </p>
 
 
-            <p> <i id="i3" class="fas fa-envelope" id="i2"></i><input type="text" name="e" placeholder="ENTER  Email"
+            <p> <i id="i3" class="fas fa-envelope" id="i2"></i>
+            <input id="input" type="text" name="e" placeholder="ENTER  Email"
                 required></p>
 
 
             <p><i id="i3" class="fas fa-lock" id="i2"></i>
 
 
-              <input type="password" name="p" placeholder="ENTER  Password" required>
+              <input id="input" id="input" type="password" name="p" placeholder="ENTER  Password" required>
 
 
             </p>
@@ -97,17 +98,17 @@
 
 
 
-              <input type="password" name="cp" placeholder="Re-type Password" required>
+              <input id="input" type="password" name="cp" placeholder="Re-type Password" required>
 
 
             </p>
 
 
-            <p><i id="i3" class="fas fa-image" id="i2"></i>
-
-
-              <input type="file" name="file" placeholder="upload your profile pic" accept="image/*"  required>
-
+            <p>
+              <label for="inputTag">
+                            <input type="file" name="file" id="inputTag" accept="image/*" required />
+                            <i class="fa  fa-camera" id="i3"></i>&nbspChoose Your Profile Photo
+                        </label>
 
             </p>
 

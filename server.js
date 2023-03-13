@@ -228,8 +228,9 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => {
     let chat_type = req.query.chat_type;
     let usr = req.query.usr;
+    let profilePic3 =req.query.profilePic3;
     if (chat_type == "General Chat") {
-        res.render('./app',{usr:usr});
+        res.render('./app',{usr:usr, profilePic3:profilePic3});
     }
     else {
         res.render('./login',);
@@ -240,9 +241,10 @@ app.get('/login', (req, res) => {
 app.get('/room', (req, res) => {
     let roomName = req.query.roomName;
     let usr = req.query.usr;
+    let profilePic=req.query.profilePic;
     
 
-    res.render('./room', { roomName:roomName, user:usr });
+    res.render('./room', { roomName:roomName, user:usr, profilePic2:profilePic });
     //res.sendFile(__dirname + 'public/login.html');
 })
 
@@ -339,7 +341,7 @@ app.post("/login", async function (req, res) {
                // res.render("app.hbs", { image: imagename });
 
 
-                res.render("index.hbs", { tempName: gobalvariable });
+                res.render("index.hbs", { tempName: gobalvariable,  profilePic:result[0].image});
 
 
 
@@ -518,13 +520,15 @@ io.on('connection', function (socket) {
     socket.on('new_user-joined', (room) => {
       let  temproom_name = room.name;
       let gobalvariable2=room.usrTemp;
+     
     
         if (temproom_name!="") {
+           
             let activeUsers = {};
      // defining empty array variable , it is used to store and provide unique id to uses
             activeUsers[socket.id] = gobalvariable2;
            
-            socket.emit('user_name', { image:profilePic, time: dataAndTime });
+            socket.emit('user_name', {time: dataAndTime });
     
             socket.join(temproom_name)
             socket.to(temproom_name).emit('user-joined1_room',  activeUsers[socket.id]);
@@ -571,7 +575,7 @@ io.on('connection', function (socket) {
         
             activeUsers2[socket.id] = gobalvariable2;
            
-            socket.emit('user_name', { image:profilePic, time: dataAndTime });
+            socket.emit('user_name', {time: dataAndTime });
             console.log(activeUsers2[socket.id] + ' Joined the Room');
             socket.broadcast.emit('user-joined1', activeUsers2[socket.id]);
             socket.on('disconnect', () => {

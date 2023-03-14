@@ -96,12 +96,19 @@ flex-direction: column;
 }
 
 #form1 {
-display:block;
+display: block;
 margin: auto;
 width: 65%;
  padding-top: 10;
 
+}
+form{
 
+  display: flex;
+  flex-direction: column;
+justify-content: center;
+justify-items: center;
+justify-self: center;
 }
 
 p{
@@ -114,6 +121,7 @@ p{
   display: block;
   margin: auto;
   margin-bottom: 10px;
+ 
   
 }
 .input {
@@ -258,6 +266,7 @@ h2 {
   justify-content: center;
   justify-items: center;
   justify-self: center;
+  font-size: 14px;
   animation: h2;
   animation-duration: 2s;
   animation-iteration-count: infinite;

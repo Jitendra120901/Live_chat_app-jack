@@ -306,7 +306,7 @@ app.post("/uploads/image/", upload.single('file'), async function (req, res) {
         }
     }
     else {
-        res.sendFile('../passMissMatch');
+        res.render('../passMissMatch');
     }
 
 });

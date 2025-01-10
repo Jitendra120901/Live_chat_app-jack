@@ -1,5 +1,5 @@
 const mongoose= require("mongoose");
-const DB='mongodb+srv://jitendra_12:jitendra@cluster0.83h76ye.mongodb.net/information?retryWrites=true&w=majority';
+const DB='mongodb+srv://jitendra_12:<db_password>@cluster0.83h76ye.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 mongoose.set('strictQuery', true);
 mongoose.connect(DB,{
  useNewUrlParser:true,

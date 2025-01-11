@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 const DB =
-  "mongodb+srv://jitendra_12:<db_password>@cluster0.83h76ye.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+  "mongodb+srv://jitendra_12:jitendra@cluster0.83h76ye.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 mongoose.set("strictQuery", true);
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 30000, // 30 seconds
+    serverSelectionTimeoutMS: 30000, 
   })
   .catch(() => {
     console.log("connected  not");
